@@ -1,0 +1,89 @@
+backend:
+  name: git-gateway
+  branch: main
+
+# Netlify Identity + Git Gateway is the default auth backend — the simplest
+# option for a Netlify-hosted site with no separate OAuth app to register.
+# To switch to GitHub OAuth instead, replace the block above with:
+#   backend:
+#     name: github
+#     repo: your-org/your-repo
+#     branch: main
+# and configure an OAuth app + set it up in Site settings > Identity.
+
+media_folder: "images/work"
+public_folder: "/images/work"
+
+# ---------------------------------------------------------------------------
+# Work collection
+#
+# The brief's schema (Section 6) assumes one markdown file per project in a
+# content/work folder. This site is a plain static build with no build step
+# (network access to install a framework toolchain wasn't available while
+# scaffolding this), so a folder of individual files would need something —
+# a build step or a serverless function — to list its contents for the
+# front end. Instead, all entries live as one JSON array in content/work.json,
+# which the site fetches directly at runtime. Decap's "files" collection
+# with a "list" widget gives the same add/edit/reorder/delete editing
+# experience; the only structural addition is an explicit "Slug" field,
+# since there's no per-entry filename to derive it from.
+# ---------------------------------------------------------------------------
+collections:
+  - name: "work"
+    label: "Work"
+    files:
+      - name: "work"
+        label: "Work entries"
+        file: "content/work.json"
+        format: "json"
+        fields:
+          - label: "Entries"
+            name: "entries"
+            widget: "list"
+            summary: "{{fields.title}} — {{fields.category}}"
+            fields:
+              - label: "Title"
+                name: "title"
+                widget: "string"
+              - label: "Slug"
+                name: "slug"
+                widget: "string"
+                hint: "Used in the project URL: /work/this-value. Lowercase, hyphens only, no spaces."
+                pattern: ['^[a-z0-9]+(?:-[a-z0-9]+)*$', "Lowercase letters, numbers and hyphens only"]
+              - label: "Category"
+                name: "category"
+                widget: "select"
+                options: ["Film", "Post", "Motion", "VFX", "Digital"]
+              - label: "Cover media"
+                name: "cover"
+                widget: "image"
+                required: false
+                hint: "Leave blank rather than uploading a stand-in — the site shows an honest 'cover pending' placeholder until real footage exists."
+              - label: "Cover video URL"
+                name: "coverVideo"
+                widget: "string"
+                required: false
+                hint: "Optional. A YouTube/Vimeo URL embeds automatically; any other URL is treated as a direct video file."
+              - label: "Description"
+                name: "description"
+                widget: "text"
+              - label: "Year"
+                name: "year"
+                widget: "string"
+                required: false
+              - label: "Credits / role"
+                name: "credits"
+                widget: "string"
+                required: false
+              - label: "Spec / personal work (not a paid client project)"
+                name: "isSpecWork"
+                widget: "boolean"
+                default: true
+                hint: "Defaults to true on purpose — mark this false only once a client relationship is confirmed. Never implied by default."
+              - label: "Publish date"
+                name: "date"
+                widget: "datetime"
+              - label: "Body"
+                name: "body"
+                widget: "markdown"
+                required: false

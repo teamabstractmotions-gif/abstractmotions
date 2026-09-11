@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Work — Abstract Motions</title>
+<meta name="description" content="Selected work from Abstract Motions across film, post-production, motion design, VFX and digital content.">
+<link rel="icon" type="image/png" href="images/favicon-32.png">
+<link rel="apple-touch-icon" href="images/favicon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,450;9..144,560;9..144,620&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<svg class="grain" aria-hidden="true">
+  <filter id="grainFilter">
+    <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"></feTurbulence>
+    <feColorMatrix type="saturate" values="0"></feColorMatrix>
+  </filter>
+  <rect width="100%" height="100%" filter="url(#grainFilter)"></rect>
+</svg>
+
+<header class="wrap site-nav">
+  <a href="index.html" class="site-nav__logo" aria-label="Abstract Motions — home">
+    <img src="images/logo.png" alt="Abstract Motions">
+    <span>ABSTRACT MOTIONS</span>
+  </a>
+  <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span></button>
+  <nav class="site-nav__links" aria-label="Primary">
+    <a href="index.html">Home</a>
+    <a href="work.html" aria-current="page">Work</a>
+    <a href="about.html">About</a>
+    <a href="contact.html" class="site-nav__cta">Start a project</a>
+  </nav>
+</header>
+
+<main id="main">
+  <section class="wrap page-hero reveal">
+    <p class="eyebrow-index mono">Work</p>
+    <h1 class="heading" style="font-size:clamp(2.25rem,5vw,4rem);">Selected work.</h1>
+  </section>
+
+  <section class="section reveal">
+    <div class="wrap">
+      <div class="work-toolbar" id="work-toolbar" hidden>
+        <div class="filter-list" id="work-filters" role="group" aria-label="Filter by category"></div>
+      </div>
+      <div id="work-target">
+        <!-- Populated by js/work.js: either a card grid or the honest empty state. -->
+        <p class="body" aria-live="polite">Loading work…</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap site-footer__row">
+    <span>© <span data-year>2026</span> Abstract Motions</span>
+    <nav class="site-footer__links" aria-label="Footer">
+      <a href="index.html">Home</a>
+      <a href="work.html">Work</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script src="js/work.js"></script>
+</body>
+</html>
